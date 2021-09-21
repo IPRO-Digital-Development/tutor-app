@@ -5,10 +5,10 @@
 ```
 tutorapp
 ├── app/                Express Application.
-├── docs/               Documentation and Documents for the project.
+├── documents/          Documents for the project.(Preferably PDF files)
 ├── .env                (Not committed) Specifies secret variables to use during development.
 ├── .gitignore          Tells git what files and folders not to commit.
-└──	README.md           (This file!) Helps explain the project.
+└── README.md           (This file!) Helps explain the project.
 ```
 
 

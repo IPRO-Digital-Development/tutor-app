@@ -7,7 +7,7 @@ tutorapp
 ├── app/           Express Application.
 	├── views      Templates for pages
 	├── .env       Specifies secret variables to use during development.
-	├── .env       Main file driving web application
+	├── index.js       Main file driving web application
 	└── public 	   Assets for web application (CSS,static images)
 ├── docs/     Documents for the project.(Preferably PDF files)
 ├── .gitignore     Tells git what files and folders not to commit.
@@ -19,7 +19,7 @@ tutorapp
 ## View the App
 
 - **Development:** [localhost:3000](http://localhost:3000)
-- **Production**: 
+- **Production**:  [tutor.notedwin.tech](https://tutor.notedwin.tech/) [![Build Status](https://jenkins.notedwin.tech/job/ipro/badge/icon)](https://jenkins.notedwin.tech/job/ipro/)
 
 ## Getting Started 
 

@@ -6,14 +6,16 @@ require("dotenv").config();
 var path = require("path");
 // database connector
 const mongoose = require('mongoose');
-//mongoose.connect('mongodb://localhost:27017/test');
+
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+console.log(mongoose.connection.readyState);
 
 var app = express();
 app.use(compression());
 app.set("view engine", "ejs");
 
-app.use(express.static(__dirname + "/public")); // used for assets such as pictures and css
-
+app.use(express.static(__dirname + "/public/css")); // used for assets such as pictures and css
+app.use(express.static(__dirname + "/public/images"));
 app.set("views", path.join(__dirname, "./views")); // used for pages
 
 app.get("", function(req, res) {

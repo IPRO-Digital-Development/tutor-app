@@ -4,11 +4,14 @@
 
 ```
 tutorapp
-├── app/                Express Application.
-├── documents/          Documents for the project.(Preferably PDF files)
-├── .env                (Not committed) Specifies secret variables to use during development.
-├── .gitignore          Tells git what files and folders not to commit.
-└── README.md           (This file!) Helps explain the project.
+├── app/           Express Application.
+	├── views      Templates for pages
+	├── .env       Specifies secret variables to use during development.
+	├── .env       Main file driving web application
+	└── public 	   Assets for web application (CSS,static images)
+├── docs/     Documents for the project.(Preferably PDF files)
+├── .gitignore     Tells git what files and folders not to commit.
+└── README.md      (This file!) Helps explain the project.
 ```
 
 
@@ -16,6 +19,7 @@ tutorapp
 ## View the App
 
 - **Development:** [localhost:3000](http://localhost:3000)
+- **Production**: 
 
 ## Getting Started 
 

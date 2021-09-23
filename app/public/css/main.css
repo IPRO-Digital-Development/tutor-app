@@ -1,0 +1,49 @@
+:root {
+  /*colors*/
+  --background: #ffffff;
+  --accents: ##76777b;
+  --highlights: #cc0000;
+  --text: #222222;
+
+  /*fonts*/
+  --titleFont: "InterDisplay";
+  --serifFont: "Lato";
+  --fontSize: 2rem;
+}
+
+html {
+  font-family: var(--serifFont), -system-ui, system-ui, sans-serif;
+  font-size: 62.5%;
+  color: var(--text);
+  display: table;
+  margin: 0 auto;
+}
+
+h1 {
+  font-family: var(--titleFont), "Raleway", "HelveticaNeue", "Helvetica Neue";
+  font-size: 2.75rem;
+  font-weight: bold;
+  margin: auto 0;
+  text-align: center;
+}
+
+nav {
+  display: flex;
+  justify-content: space-evenly;
+  height: auto;
+  margin: auto;
+  border-bottom: 1px solid #3f3f3f;
+  align-items: center;
+  -webkit-transition: 0.3s ease-out;
+  transition: 0.3s ease-out;
+  max-width: 1000px;
+}
+
+nav > a {
+  color: var(--text);
+  text-decoration: none;
+  padding: 5px 4px;
+  opacity: 0.85;
+  text-align: center;
+  font-size: var(--fontSize);
+}

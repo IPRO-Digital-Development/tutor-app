@@ -1,0 +1,44 @@
+<%- include('../hd_ft/header'); -%>
+
+<div class="container" id="main-view">
+
+    <div class="panel-heading">
+        <h3>Account Sign Up</h3>
+    </div>
+
+    <div class="panel-body">
+        <form class="form-signin" method="POST" action="/register">
+            <div class="input-group" id="firstname-area">
+                <input type="text" class="form-control" placeholder="First Name" name="First_Name" required>
+            </div>
+            
+            <div class="input-group" id="lastname-area">
+                    <input type="text" class="form-control" placeholder="Last Name" name="Last_Name" required>
+            </div>
+            
+            <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Student ID" name="A_id" required>
+            </div>
+
+            
+            <div class="input-group">
+                <input type="email" class="form-control" placeholder="Student Hawk Email" name="email"mrequired>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" class="form-control" placeholder="Verify Password" name="repassword" required>
+            </div>
+
+            <input id = "submit-btn" type="submit"/>
+            
+        </form>
+
+    </div>
+
+</div>
+
+<%- include ('../hd_ft/footer'); -%>

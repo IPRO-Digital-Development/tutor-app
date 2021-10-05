@@ -1,22 +1,19 @@
 :root {
   /*colors*/
-  --background: #ffffff;
+  --text: #ffffff;
   --accents: ##76777b;
   --highlights: #cc0000;
-  --text: #222222;
+  --black: #222222;
 
   /*fonts*/
   --titleFont: "InterDisplay";
   --serifFont: "Lato";
-  --fontSize: 2rem;
+  --fontSize: 2rem !important;
 }
 
 html {
   font-family: var(--serifFont), -system-ui, system-ui, sans-serif;
-  font-size: 62.5%;
-  color: var(--text);
-  display: table;
-  margin: 0 auto;
+  color: var(--black);
 }
 
 h1 {
@@ -28,24 +25,23 @@ h1 {
 }
 
 nav {
-  display: flex;
-  justify-content: space-evenly;
-  height: auto;
-  margin: auto;
-  border-bottom: 1px solid #3f3f3f;
-  align-items: center;
+  background-color: var(--highlights);
+  color: var(--text);
   -webkit-transition: 0.3s ease-out;
   transition: 0.3s ease-out;
-  max-width: 1000px;
 }
 
-nav > a {
+nav a {
   color: var(--text);
   text-decoration: none;
-  padding: 5px 4px;
   opacity: 0.85;
   text-align: center;
   font-size: var(--fontSize);
 }
 
-
+.logo {
+  height: auto;
+  width: auto;
+  max-height: 72px;
+  max-width: 250px;
+}

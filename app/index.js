@@ -9,6 +9,13 @@ const mongoose = require('mongoose');
 var helmet = require('helmet')
 
 var createError = require('http-errors');
+
+var Promise = require('bluebird'); // Require 'bluebird' in your package.json file, and run npm install.
+var fs = require('fs');
+var path = require('path');
+var marked = require('marked')
+Promise.promisifyAll(fs);
+
 //var indexRouter = require('./routes/index');
 //var usersRouter = require('./routes/users');
 //
@@ -28,6 +35,7 @@ app.use(express.urlencoded({ extended: false }));
 app.set("view engine", "ejs");
 
 app.use(express.static(__dirname + "/public/css")); // used for assets such as pictures and css
+app.use('/css', express.static(__dirname + '/node_modules/bootstrap/dist/css'));
 app.use(express.static(__dirname + "/public/images"));
 app.set("views", path.join(__dirname, "./views")); // used for pages
 
@@ -37,6 +45,12 @@ app.get("", function(req, res) {
 
 app.post("/", function(req, res) {
   res.send("Hello World");
+});
+
+app.get('/wiki', function (req, res) {
+  fs.readFileAsync(path.join(__dirname, '/markdown/wiki.md')).then(function(val) {
+    res.send(marked(val.toString()));
+  });
 });
 
 // catch 404 and forward to error handler

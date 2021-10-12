@@ -10,10 +10,14 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bluebird": "^3.7.2",
+    "bootstrap": "^5.1.1",
     "compression": "^1.7.4",
     "dotenv": "^10.0.0",
     "ejs": "^3.1.6",
     "express": "^4.17.1",
+    "helmet": "^4.6.0",
+    "marked": "^3.0.4",
     "mongoose": "^6.0.6",
     "nodemon": "^2.0.12"
   }

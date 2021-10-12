@@ -6,59 +6,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <title>Tutor App</title>
 </head>
 
+
 <body>
-    <div id="bar">
-      <div class="barElement">
-        <img id="tempLogo" src="iitTutors.jpg" alt="Temp Logo">
-      </div>
-      <div class="barElement">
-        <div>
-          <img src="profileFigure.jpg" alt="Profile Figure">
+    <%- include('nav.ejs') %>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <img class="img-fluid rounded bg-black" src="tech-white.png" alt="">
+                <p class="lead text-muted">Chat with your tutor!
+                    Coming Soon!</p>
+
+
+                <a class="btn btn-danger" href="/tutor">Get tutoring session started.</a>
+                <a href="/wiki" class="btn btn-secondary my-2">Check out our Wiki page.</a>
+            </div>
         </div>
-      </div>
-      <div class="barElement">
-        <div id="userName">
-          User Name
+    </section>
+
+
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Looking for a tutor?</h2>
+                <p>Hard to schedule a meeting with a tutor?</p>
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
+
+            <div class="col-md-4">
+                <h2>Hours</h2>
+                <p>
+                    TBD
+                </p>
+            </div>
         </div>
-      </div>
-      <div class="barElement">
-        <div class="menBar">...</div>
-        <div class="menBar">...</div>
-        <div class="menBar">...</div>
-      </div>
     </div>
-
-    <div id="carouselBox">
-      <h2>Title: Current class or carousel</h2>
-      <div id="contentOne"> Content Box</div>
-    </div>
-
-    <div id="secondBox">
-      <h2>Title:Current specific issue</h1>
-      <div id="contentTwo"> Content Box</div>
-    </div>
-
-    <div id="thirdBox">
-      <h2>Title: Chat or communication options</h2>
-      <div id="contentThree"> Content Box</div>
-    </div>
-
-    <!--<nav id="navDefault">
-        <div class="imagediv">
-            <img src="tech-white.png" alt="logo" class="logo">
-        </div>
-        <h1>Tutor App</h1>
-        <a>Hello, User200!</a>
-    </nav>
-
-    <a>
-        Chat with your tutor!
-        Coming Soon!
-    </a>-->
 </body>
 
 </html>

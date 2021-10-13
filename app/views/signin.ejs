@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="signin.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <title>Tutor App</title>
+</head>
+
+<body>
+    <%- include('nav.ejs') %>
+    <div class="container" id="main-view">
+    
+        <div class="panel-body">
+
+            <div class="panel-heading">
+                <h3>Account Sign In</h3>
+            </div>
+
+            <form class="form-signin" method="POST" action="/signin">
+     
+                <div class="input-group">
+                    <input type="email" class="form-control" placeholder="Student Hawk Email" name="email"mrequired>
+                </div>
+                
+                <div class="input-group">
+                    <input type="password" name="password" class="form-control" placeholder="Password" required>
+                </div>
+    
+                <input id = "login-btn" type="submit" value="login"/>
+                
+            </form>
+            
+            <form class="form-signin" method="GET" action="/signup">
+                <input id = "register-btn" type="submit" value="Register">    
+            </form>
+    
+        </div>
+    
+    </div>
+
+</div>
+</body>
+</html>

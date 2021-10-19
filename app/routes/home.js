@@ -19,6 +19,12 @@ router.get("/home", function (req, res) {
    res.render("index");
 });
 
+router.get("/landing", function (req, res) {
+   res.render("landing");
+});
+
+
+
 router.post("/signup", function (req, res, next) {
 
     var First_Name = req.body.First_Name;

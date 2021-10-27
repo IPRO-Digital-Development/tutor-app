@@ -17,6 +17,7 @@ var Promise = require("bluebird"); // Require 'bluebird' in your package.json fi
 var fs = require("fs");
 var path = require("path");
 
+var Chat = require("./models/chat");
 
 var marked = require("marked");
 const http = require("http");
@@ -30,15 +31,24 @@ Promise.promisifyAll(fs);
 
 setUpPassport();
 
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Database connected");
+  })
+  .catch((err) => console.log(err));
 
-
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-console.log(mongoose.connection.readyState);
-
-//app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+      "script-src": ["'self'", "'unsafe-inline'", "notedwin.tech"],
+    },
+  },
+}));
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -48,13 +58,15 @@ app.use(express.static(__dirname + "/public/css")); // used for assets such as p
 app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css"));
 app.use(express.static(__dirname + "/public/images"));
 app.set("views", path.join(__dirname, "./views")); // used for pages
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(session({
-  secret:"tutorapp!@#$!@#",
-  resave:false,
-  saveUninitialized:false
-}));
+app.use(
+  session({
+    secret: "tutorapp!@#$!@#",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
@@ -69,19 +81,32 @@ app.get("/wiki", function (req, res) {
   });
 });
 
-
-io.on('connection', (socket) => {
-  socket.on('chat message', msg => {
-    io.emit('chat message', msg);
-  });
-});
-
-
 app.get("/chat", function (req, res) {
   res.render("chat");
 });
 
+io.on("connection", (socket) => {
+  Chat.find()
+    .sort({ createdAt: -1 })
+    .limit(5)
+    .then((result) => {
+      for (let i = result.length - 1; i > -1; i--) {
+        socket.emit("chat message", result[i]["message"]);
+      }
+    });
 
-server.listen(3000, () => {
-  console.log("listening on *:3000");
+  socket.on("chat message", (msg) => {
+    const message = new Chat({ message: msg });
+    message.save().then(() => {
+      io.emit("chat message", msg);
+    });
+  });
+});
+
+app.get("/edit", function (req, res) {
+  res.render("edit");
+});
+
+server.listen(3001, () => {
+  console.log("listening on *:3001");
 });

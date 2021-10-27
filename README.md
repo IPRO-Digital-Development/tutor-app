@@ -18,7 +18,7 @@ tutorapp
 
 ## View the App
 
-- **Development:** [localhost:3000](http://localhost:3000)
+- **Development:** [localhost:3001](http://localhost:3001)
 - **Production**:  [tutor.notedwin.tech](https://tutor.notedwin.tech/) [![Build Status](https://jenkins.notedwin.tech/job/ipro/badge/icon)](https://jenkins.notedwin.tech/job/ipro/)
 
 ## Getting Started 

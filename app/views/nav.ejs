@@ -9,6 +9,12 @@
             </ul>
 
         </div>
-        <a class="nav-link px-2 text-white" href="/signin">Sign In</a>
+        <% if(currentUser != null) { %>
+            <a class="nav-link px-2 text-white" href="/profile"><%= currentUser.First_Name %> <%= currentUser.Last_Name %></a>
+            <a class="nav-link px-2 text-white" href="/logout">Logout</a>
+        <%}%>
+        <% if(currentUser == null) { %>
+            <a class="nav-link px-2 text-white" href="/signin">Sign In</a>
+        <%}%>
     </div>
 </nav>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <title>Tutor App</title>
+</head>
+
+<body>
+    <%- include('nav.ejs') %>
+    <div class="container" id="profile-container">
+        <div id = "profile-info">
+        <p>A id: <%= profData.A_id %></p>
+        <p>email: <%= profData.email %></p>
+        <p>Major: <%= profData.major %></p>
+        <p>Interest: <%= profData.interest %></p>
+        <p>Classes Taken: <%= profData.classes %></p>
+        <p>Availability: <%= profData.availability %></p>
+        <p>Self-Description: <%= profData.description %></p>
+        </div>
+        
+        <form class="form-signin" method="GET" action="/profileEdit">
+            <input id = "register-btn" type="submit" value="Edit">    
+        </form>
+
+    </div>
+
+
+</body>
+
+</html>

@@ -7,8 +7,11 @@ var path = require("path");
 // database connector
 const mongoose = require("mongoose");
 var helmet = require("helmet");
-
+var session = require("express-session");
 var createError = require("http-errors");
+
+var passport = require("passport");
+var setUpPassport = require("./setuppassport");
 
 var Promise = require("bluebird"); // Require 'bluebird' in your package.json file, and run npm install.
 var fs = require("fs");
@@ -25,11 +28,9 @@ const io = new Server(server);
 var bodyParser = require("body-parser"); //get data from web app
 Promise.promisifyAll(fs);
 
-//var indexRouter = require('./routes/index');
-//var usersRouter = require('./routes/users');
-//
-//app.use('/', indexRouter);
-//app.use('/users', usersRouter);
+setUpPassport();
+
+
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
@@ -49,6 +50,14 @@ app.use(express.static(__dirname + "/public/images"));
 app.set("views", path.join(__dirname, "./views")); // used for pages
 app.use(bodyParser.urlencoded({extended:true}));
 
+app.use(session({
+  secret:"tutorapp!@#$!@#",
+  resave:false,
+  saveUninitialized:false
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", require("./routes"));
 
@@ -60,9 +69,6 @@ app.get("/wiki", function (req, res) {
   });
 });
 
-app.get("/signin", function (req, res) {
-  res.render("signin");
-});
 
 io.on('connection', (socket) => {
   socket.on('chat message', msg => {
@@ -76,24 +82,6 @@ app.get("/chat", function (req, res) {
 });
 
 
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
-
-// error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
-  
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
-
-
-//front-end 3000
-
-server.listen(3001, () => {
+server.listen(3000, () => {
   console.log("listening on *:3000");
 });

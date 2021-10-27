@@ -6,11 +6,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <title>Tutor App</title>
 </head>
 
 <body>
-    <a>work</a>
+    <%- include('nav.ejs') %>
+    <section class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <img class="img-fluid rounded bg-black" src="tech-white.png" alt="">
+                <p class="lead text-muted">Chat with your tutor!
+                    Coming Soon!</p>
+
+
+                <a class="btn btn-danger" href="/chat">Get tutoring session started.</a>
+                <a href="/wiki" class="btn btn-secondary my-2">Check out our Wiki page.</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Looking for a tutor?</h2>
+                <p>Hard to schedule a meeting with a tutor?</p>
+            </div>
+
+            <div class="col-md-4">
+
+            </div>
+
+            <div class="col-md-4">
+                <h2>Hours</h2>
+                <p>
+                    TBD
+                </p>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>

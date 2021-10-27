@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <title>Tutor App</title>
+</head>
+
+<body>
+    <%- include('nav.ejs') %>
+    <div class="container" id="profile-container">
+        
+        <form class="form-signin" method="POST" action="/saveEditProf">
+     
+            <div class="form-group">
+                <label for="Major field">Major</label>
+                <textarea class="form-control" rows="1" name="Major"><%= profData.major%></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="Interest">Interest</label>
+                <textarea class="form-control" rows="5" name="Interest"><%= profData.interest%></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="Classes Taken">Classes Taken</label>
+                <textarea class="form-control" rows="2 " name="Classes"><%= profData.classes%></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="Availability">Availability</label>
+                <textarea class="form-control" rows="3" name="Availability"><%= profData.availability%></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="Self-Description">Self-Description</label>
+                <textarea class="form-control" rows="6" name="Description"><%= profData.description%></textarea>
+            </div>
+
+            <input id = "login-btn" type="submit" value="Save"/>
+            
+        </form>
+        
+        <form class="form-signin" method="GET" action="/cancelEdit">
+            <input id = "register-btn" type="submit" value="Cancel">    
+        </form>
+
+    </div>
+
+
+</body>
+
+</html>

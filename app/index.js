@@ -13,7 +13,7 @@ var createError = require("http-errors");
 var passport = require("passport");
 var setUpPassport = require("./setuppassport");
 
-var Promise = require("bluebird"); // Require 'bluebird' in your package.json file, and run npm install.
+var Promise = require("bluebird");
 var fs = require("fs");
 var path = require("path");
 
@@ -26,7 +26,7 @@ const server = http.createServer(app);
 var { Server } = require("socket.io");
 const io = new Server(server);
 
-var bodyParser = require("body-parser"); //get data from web app
+var bodyParser = require("body-parser");
 Promise.promisifyAll(fs);
 
 setUpPassport();
@@ -41,14 +41,19 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-      "script-src": ["'self'", "'unsafe-inline'", "notedwin.tech"],
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "script-src": ["'self'", "'unsafe-inline'", "notedwin.tech"],
+        "frame-src": [
+          "https://datastudio.google.com/embed/reporting/f6f80816-a403-4e41-9cef-59185f89973b/page/HDQ0B",
+        ],
+      },
     },
-  },
-}));
+  })
+);
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -79,10 +84,6 @@ app.get("/wiki", function (req, res) {
   ) {
     res.send(marked(val.toString()));
   });
-});
-
-app.get("/chat", function (req, res) {
-  res.render("chat");
 });
 
 io.on("connection", (socket) => {

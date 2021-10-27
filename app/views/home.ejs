@@ -2,51 +2,51 @@
 <html lang="en">
 
 <head>
+    <meta name="google-site-verification" content="cA572Q0bvFJzI7FwL0qH4o5Lu1UbVgGnN5SK424g0zU" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="google-site-verification" content="cA572Q0bvFJzI7FwL0qH4o5Lu1UbVgGnN5SK424g0zU" />
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <title>Tutor App</title>
 </head>
 
-
 <body>
     <%- include('nav.ejs') %>
-    <section class="py-5 text-center container">
-        <div class="row py-lg-5">
-            <div class="col-lg-6 col-md-8 mx-auto">
-                <img class="img-fluid rounded bg-black" src="tech-white.png" alt="">
-                <p class="lead text-muted">Chat with your tutor!
-                    Coming Soon!</p>
+        <section class="py-5 text-center container">
+            <div class="row py-lg-5">
+                <div class="col-lg-6 col-md-8 mx-auto">
+                    <img id="tutoring" class="img-fluid rounded" src="tutoring.jpg" alt="tutoring">
+                    <p class="lead text-muted">Find your tutor!</p>
 
 
-                <a class="btn btn-danger" href="/chat">Get tutoring session started.</a>
-                <a href="/wiki" class="btn btn-secondary my-2">Check out our Wiki page.</a>
+                    <a class="btn btn-danger" href="/chat">Start Chatting with Students/Tutors.</a>
+                    <a href="/wiki" class="btn btn-secondary my-2">Check out our Wiki page.</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    
+                    <h2>Looking for a tutor?</h2>
+                    <p>Hard to schedule a meeting with a tutor?</p>
+                </div>
+
+                <div class="col-md-4">
+
+                </div>
+
+                <div class="col-md-4">
+                    <img id="schedule" class="img-fluid rounded" src="schedule.jpg" alt="tutoring">
+                    <h2>Hours</h2>
+                    <p>
+                        TBD
+                    </p>
+                </div>
             </div>
         </div>
-    </section>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-4">
-                <h2>Looking for a tutor?</h2>
-                <p>Hard to schedule a meeting with a tutor?</p>
-            </div>
-
-            <div class="col-md-4">
-
-            </div>
-
-            <div class="col-md-4">
-                <h2>Hours</h2>
-                <p>
-                    TBD
-                </p>
-            </div>
-        </div>
-    </div>
 </body>
 
 </html>

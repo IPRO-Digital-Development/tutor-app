@@ -380,73 +380,75 @@ Find more companies to do a SWOT Analysis
 
 **1)**
 
-![](RackMultipart20211027-4-qeiewf_html_b2d4f1d431871685.png)
+![](img/Picture1.png)
 
 **2)**
 
-![](RackMultipart20211027-4-qeiewf_html_34b9b119f959b602.png)
+![](img/Picture2.png)
 
 **3)**
 
-![](RackMultipart20211027-4-qeiewf_html_5fd25a08ad381253.png)
+![](img/Picture3.png)
 
 **4)**
 
-![](RackMultipart20211027-4-qeiewf_html_2657ef2f91f2d0d6.png)
+![](img/Picture4.png)
 
-**5)**![](RackMultipart20211027-4-qeiewf_html_f08167b3bad81c16.png)
+**5)**
+
+![](img/Picture5.png)
 
 **6)**
 
-![](RackMultipart20211027-4-qeiewf_html_8c7c5c05987372c2.png)
+![](img/Picture6.png)
 
 **7)**
 
-![](RackMultipart20211027-4-qeiewf_html_9fb07225aa94cb2c.png)
+![](img/Picture7.png)
 
 **8)**
 
-![](RackMultipart20211027-4-qeiewf_html_766827bf74de8682.png)
+![](img/Picture8.png)
 
 **9)**
 
-![](RackMultipart20211027-4-qeiewf_html_d92b0e7862040f0a.png)
+![](img/Picture9.png)
 
 **10)**
 
-![](RackMultipart20211027-4-qeiewf_html_7ccc5f3489f9cd2e.png)
+![](img/Picture10.png)
 
 **11)**
 
-![](RackMultipart20211027-4-qeiewf_html_a2d047b27c880f7.png)
+![](img/Picture11.png)
 
 **12)**
 
-![](RackMultipart20211027-4-qeiewf_html_51bb659dce327ed5.png)
+![](img/Picture12.png)
 
 **13)**
 
-![](RackMultipart20211027-4-qeiewf_html_813d2129e2dc05ec.png)
+![](img/Picture13.png)
 
 **14)**
 
-![](RackMultipart20211027-4-qeiewf_html_bd4fc49bfb32103d.png)
+![](img/Picture14.png)
 
 **15)**
 
-![](RackMultipart20211027-4-qeiewf_html_22efc898f1e5324b.png)
+![](img/Picture15.png)
 
 **16)**
 
-![](RackMultipart20211027-4-qeiewf_html_cea1329fbd07f1b9.png)
+![](img/Picture16.png)
 
 **17)**
 
-![](RackMultipart20211027-4-qeiewf_html_376e47c07fad1484.png)
+![](img/Picture17.png)
 
 **18)**
 
-![](RackMultipart20211027-4-qeiewf_html_5895dbe74a1a2dfe.png)
+![](img/Picture18.png)
 
 ## **Team Members**
 

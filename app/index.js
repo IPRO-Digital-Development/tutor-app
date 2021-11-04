@@ -30,6 +30,7 @@ const io = new Server(server);
 var bodyParser = require("body-parser");
 const { time } = require("console");
 const { render } = require("ejs");
+const { query } = require("express");
 Promise.promisifyAll(fs);
 
 setUpPassport();
@@ -154,13 +155,13 @@ app.post("/meet", async function (req, res) {
   var day = req.body.weekday;
   var time = parseInt(req.body.time);
 
-  console.log(day,major,time)
+  var query = {"major":major,"day":day,"time":time}
 
   Tutor.find({
     major: major,
     weekdays: { $in: [day] },
-    start_time: { $lt: time },
-    end_time: { $gt: time },
+    start_time: { $lte: time },
+    end_time: { $gte: time },
   })
     .lean()
     .exec(function (err, docs) {
@@ -169,7 +170,7 @@ app.post("/meet", async function (req, res) {
       }
     });
   await new Promise((resolve) => setTimeout(resolve, 500));
-  res.render("meet_result",{tutors:tutors})
+  res.render("meet_result",{tutors:tutors, query:query })
 });
 
 server.listen(3001, () => {

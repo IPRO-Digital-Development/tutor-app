@@ -20,15 +20,17 @@
                 <h1 class="mb-3">Find a Tutor?</h2>
             </div>
 
-            <% if(tutors){ %>
-                <% if(tutors){ %>
-                    <% tutors.forEach(function(tutor) { %>
-                        <li> Name:<%= tutor.tutor %> Major:<%= tutor.major %></li>
-                     <% }); %> 
-                 <% } %>    
-              <% } else{ %>  
+            <h2>
+                <%= query.major %> <%= query.time %> <%= query.day %>
+            </h2>
+
+
+            <% if(tutors === undefined || tutors.length == 0){ %>
                 <a>bruh</a>
-             <% } %>
+              <% ;} else{ %>  
+                <% tutors.forEach(function(tutor) { %>
+                <li> Name:<%= tutor.tutor %> Major:<%= tutor.major %></li>
+             <% })} %>
 
 
         </div>

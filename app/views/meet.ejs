@@ -23,7 +23,7 @@
             <form method="POST" action="/meet">
                 <a>Pick the Major you want to study for</a>
                 <select name="major" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <option selected>Select Major</option>
+                    <option selected value="CS">Select Major:</option>
                     <% for (var i=0; i < majors.length; i++) { %>
                         <option value=<%=majors[i] %>> <%= majors[i] %>
                         </option>
@@ -32,7 +32,7 @@
 
                 <a>Pick what day you want to study</a>
                 <select name="weekday" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <option selected>Select Day</option>
+                    <option selected value="TH">Select Day</option>
                     <% for (var i=0; i < days.length; i++) { %>
                         <option value=<%=days[i].short %>> <%= days[i].value %>
                         </option>
@@ -41,8 +41,8 @@
                 
                 <a>Pick what time you want to study (24 Hr time)</a>
                 <select name="time" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                    <option selected>Select Time:</option>
-                    <% for (var i=0; i < 24; i++) { %>
+                    <option selected value="1300">Select Time:</option>
+                    <% for (var i=10; i < 20; i++) { %>
                         <option value=<%=i %>00> <%= i %>:00 </option>
                         <% } %>
                 </select>

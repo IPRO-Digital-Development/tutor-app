@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <title>Tutor App</title>
+</head>
+
+<body>
+    <%- include('nav.ejs') %>
+    <div class="container align-middle" id="main-view">
+        <div class="w-50 mx-auto py-5 my-5">
+            <div class="mb-3">
+                <h1 class="mb-3">Find a Tutor?</h2>
+            </div>
+
+            <form method="POST" action="/meet">
+                <a>Pick the Major you want to study for</a>
+                <select name="major" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option selected value="CS">Select Major:</option>
+                    <% for (var i=0; i < majors.length; i++) { %>
+                        <option value=<%=majors[i] %>> <%= majors[i] %>
+                        </option>
+                        <% } %>
+                </select>
+
+                <a>Pick what day you want to study</a>
+                <select name="weekday" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option selected value="TH">Select Day</option>
+                    <% for (var i=0; i < days.length; i++) { %>
+                        <option value=<%=days[i].short %>> <%= days[i].value %>
+                        </option>
+                        <% } %>
+                </select>
+                
+                <a>Pick what time you want to study (24 Hr time)</a>
+                <select name="time" class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                    <option selected value="1300">Select Time:</option>
+                    <% for (var i=10; i < 20; i++) { %>
+                        <option value=<%=i %>00> <%= i %>:00 </option>
+                        <% } %>
+                </select>
+
+                <button class="w-100 btn btn-lg btn-primary" type="submit" value="login">Find your tutor!</button>
+            </form>
+        </div>
+
+    </div>
+</body>
+
+</html>

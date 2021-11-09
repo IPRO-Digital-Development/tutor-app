@@ -7,13 +7,18 @@ var path = require("path");
 // database connector
 const mongoose = require("mongoose");
 var helmet = require("helmet");
-
+var session = require("express-session");
 var createError = require("http-errors");
 
-var Promise = require("bluebird"); // Require 'bluebird' in your package.json file, and run npm install.
+var passport = require("passport");
+var setUpPassport = require("./setuppassport");
+
+var Promise = require("bluebird");
 var fs = require("fs");
 var path = require("path");
 
+var Chat = require("./models/chat");
+var Tutor = require("./models/tutors");
 
 var marked = require("marked");
 const http = require("http");
@@ -22,22 +27,37 @@ const server = http.createServer(app);
 var { Server } = require("socket.io");
 const io = new Server(server);
 
-var bodyParser = require("body-parser"); //get data from web app
+var bodyParser = require("body-parser");
+const { time } = require("console");
+const { render } = require("ejs");
+const { query } = require("express");
 Promise.promisifyAll(fs);
 
-//var indexRouter = require('./routes/index');
-//var usersRouter = require('./routes/users');
-//
-//app.use('/', indexRouter);
-//app.use('/users', usersRouter);
+setUpPassport();
 
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-console.log(mongoose.connection.readyState);
+mongoose
+  .connect(process.env.MONGODB_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    console.log("Database connected");
+  })
+  .catch((err) => console.log(err));
 
-//app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "script-src": ["'self'", "'unsafe-inline'", "notedwin.tech"],
+        "frame-src": [
+          "https://datastudio.google.com/embed/reporting/f6f80816-a403-4e41-9cef-59185f89973b/page/HDQ0B",
+        ],
+      },
+    },
+  })
+);
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -45,10 +65,21 @@ app.set("view engine", "ejs");
 
 app.use(express.static(__dirname + "/public/css")); // used for assets such as pictures and css
 app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css"));
+app.use("/js", express.static(__dirname + "/node_modules/bootstrap/dist/js"));
 app.use(express.static(__dirname + "/public/images"));
 app.set("views", path.join(__dirname, "./views")); // used for pages
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
+app.use(
+  session({
+    secret: "tutorapp!@#$!@#",
+    resave: false,
+    saveUninitialized: false,
+  })
+);
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", require("./routes"));
 
@@ -60,40 +91,88 @@ app.get("/wiki", function (req, res) {
   });
 });
 
-app.get("/signin", function (req, res) {
-  res.render("signin");
-});
+io.on("connection", (socket) => {
+  Chat.find()
+    .sort({ createdAt: -1 })
+    .limit(5)
+    .then((result) => {
+      for (let i = result.length - 1; i > -1; i--) {
+        socket.emit("chat message", result[i]["message"]);
+      }
+    });
 
-io.on('connection', (socket) => {
-  socket.on('chat message', msg => {
-    io.emit('chat message', msg);
+  socket.on("chat message", (msg) => {
+    const message = new Chat({ message: msg });
+    message.save().then(() => {
+      io.emit("chat message", msg);
+    });
   });
 });
 
-
-app.get("/chat", function (req, res) {
-  res.render("chat");
+app.get("/edit", function (req, res) {
+  res.render("edit");
 });
 
+app.get("/meet", async function (req, res) {
+  uniq_majors = [];
+  days = [];
+  Tutor.distinct("major")
+    .lean()
+    .exec(function (err, docs) {
+      for (let i = 0; i < docs.length; i++) {
+        uniq_majors.push(docs[i]);
+      }
+    });
 
-// app.use(function(req, res, next) {
-//   next(createError(404));
-// });
+  Tutor.distinct("weekdays")
+    .lean()
+    .exec(function (err, docs) {
+      for (let i = 0; i < docs.length; i++) {
+        if (docs[i] === "MO") {
+          days.push({ value: "Monday", short: docs[i] });
+        }
+        if (docs[i] === "TU") {
+          days.push({ value: "Tuesday", short: docs[i] });
+        }
+        if (docs[i] === "WE") {
+          days.push({ value: "Wednesday", short: docs[i] });
+        }
+        if (docs[i] === "TH") {
+          days.push({ value: "Thursday", short: docs[i] });
+        }
+        if (docs[i] === "FR") {
+          days.push({ value: "Friday", short: docs[i] });
+        }
+      }
+    });
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  res.render("meet", { majors: uniq_majors, weekdays: days });
+});
 
-// error handler
-// app.use(function(err, req, res, next) {
-//   // set locals, only providing error in development
-//   res.locals.message = err.message;
-//   res.locals.error = req.app.get('env') === 'development' ? err : {};
-  
-//   // render the error page
-//   res.status(err.status || 500);
-//   res.render('error');
-// });
+app.post("/meet", async function (req, res) {
+  var tutors = [];
+  var major = req.body.major;
+  var day = req.body.weekday;
+  var time = parseInt(req.body.time);
 
+  var query = {"major":major,"day":day,"time":time}
 
-//front-end 3000
+  Tutor.find({
+    major: major,
+    weekdays: { $in: [day] },
+    start_time: { $lte: time },
+    end_time: { $gte: time },
+  })
+    .lean()
+    .exec(function (err, docs) {
+      for (let i = 0; i < docs.length; i++) {
+        tutors.push(docs[i]);
+      }
+    });
+  await new Promise((resolve) => setTimeout(resolve, 500));
+  res.render("meet_result",{tutors:tutors, query:query })
+});
 
 server.listen(3001, () => {
-  console.log("listening on *:3000");
+  console.log("listening on *:3001");
 });

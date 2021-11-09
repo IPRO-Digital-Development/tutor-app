@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <title>Tutor App</title>
+</head>
+
+<body>
+    <%- include('nav.ejs') %>
+    <div class="container align-middle" id="main-view">
+        <div class="w-50 mx-auto py-5 my-5">
+            <div class="mb-3">
+                <h1 class="mb-3">Find a Tutor?</h2>
+            </div>
+
+            <h2>
+                <%= query.major %> <%= query.time %> <%= query.day %>
+            </h2>
+
+
+            <% if(tutors === undefined || tutors.length == 0){ %>
+                <a>bruh</a>
+              <% ;} else{ %>  
+                <% tutors.forEach(function(tutor) { %>
+                <li> Name:<%= tutor.tutor %> Major:<%= tutor.major %></li>
+             <% })} %>
+
+
+        </div>
+    </div>
+
+</body>
+
+</html>

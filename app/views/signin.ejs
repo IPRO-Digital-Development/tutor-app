@@ -1,48 +1,47 @@
 <!DOCTYPE html>
 
 <html>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="signin.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <title>Tutor App</title>
 </head>
 
-<body>
+<body class="text-center vsc-initialized">
     <%- include('nav.ejs') %>
-    <div class="container" id="main-view">
+        <div class="container align-middle" id="main-view">
+            <div class="w-50 mx-auto py-5 my-5">
+                <div class="mb-3">
+                    <h1 class="mb-3">Sign-In</h2>
+                </div>
     
-        <div class="panel-body">
+                <form method="POST" action="/signin">
+                    <div class="form-floating mb-4">
+                        <input type="email" name="email" class="form-control" id="floatingInput"
+                            placeholder="" required>
+                        <label for="floatingInput">Email address</label>
+                    </div>
+                    <div class="form-floating mb-4">
+                        <input type="password" name="password" class="form-control"
+                            id="floatingPassword" placeholder="Password" required>
+                        <label for="floatingPassword">Password</label>
+                    </div>
 
-            <div class="panel-heading">
-                <h3>Account Sign In</h3>
+                    <button class="w-50 btn btn-lg btn-primary" type="submit" value="login">Sign in</button>
+                </form>
             </div>
 
-            <form class="form-signin" method="POST" action="/signin">
-     
-                <div class="input-group">
-                    <input type="email" class="form-control" placeholder="Student Hawk Email" name="email"mrequired>
-                </div>
-                
-                <div class="input-group">
-                    <input type="password" name="password" class="form-control" placeholder="Password" required>
-                </div>
-    
-                <input id = "login-btn" type="submit" value="login"/>
-                
-            </form>
-            
-            <form class="form-signin" method="GET" action="/signup">
-                <input id = "register-btn" type="submit" value="Register">    
-            </form>
-    
-        </div>
-    
-    </div>
+            <div class="mb-3">
+                <h2>Need to Register? </h2>
+                <a class="btn btn-primary" href="/signup" role="button">Register page</a>
+            </div>
 
-</div>
+        </div>
+
 </body>
+
 </html>

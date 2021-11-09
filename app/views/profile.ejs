@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/cd39648b27.js" crossorigin="anonymous"></script>
+    <title>Tutor App</title>
+</head>
+
+<body>
+    <%- include('nav.ejs') %>
+    <div class="container" id="profile-container">
+
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5 "> 
+                    <i class="fas fa-user fa-10x"></i>
+                    <span class="name"><%= currentUser.First_Name%> <%= currentUser.Last_Name%></span>
+                    <a href="mailto: <%= profData.email %>"><%= profData.email %></a>
+                    <span class="major">Major: <%= profData.major %></span>
+                </div>
+            </div>
+            <div class="col-md-9 border-right">
+                <div class="p-3 py-5">
+                    <div class="d-flex">
+                        <h4 class="text-right">Profile</h4>
+                    </div>
+                    <div class="profile-content row mt-2">
+                        <div class="col-md-12"><label class="h5">Interest</label>
+                            <p><%= profData.interest %></p>
+                        </div>
+                        <div class="col-md-12"><label class="h5">Classes Taken</label>
+                            <p><%= profData.classes %></p>
+                        </div>
+                        <div class="col-md-12"><label class="h5">Availability</label>
+                            <p><%= profData.interest %></p>
+                        </div>
+                        <div class="col-md-12"><label class="h5">Self-Description</label>
+                            <% var lines = profData.description.split("\n") %>
+                            <p><%= lines[0]%></br>
+                            <% lines.shift() %>
+                            <% lines.forEach(function(line) {  %>
+                                <% if(line) { %>
+                                    <%= line %></br>
+                                <% } %>
+                            <% }) %>
+                        </div>
+                    </div>
+                    <div class="mt-3 text-center">
+                        <form class="form-signin" method="GET" action="/profileEdit">
+                            <button class="btn btn-primary profile-button">Edit Profile</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

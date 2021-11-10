@@ -29,6 +29,10 @@ router.get("/data", function (req, res) {
   res.render("data");
 });
 
+router.get("/cal", function (req, res) {
+  res.render("cal");
+});
+
 router.post(
   "/signup",
   function (req, res, next) {

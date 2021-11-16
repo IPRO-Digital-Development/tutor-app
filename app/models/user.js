@@ -6,6 +6,7 @@ var userSchema = new mongoose.Schema({
   A_id: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
+  Tutor: { type: Boolean, required: true}
 });
 
 var User = mongoose.model("User", userSchema);

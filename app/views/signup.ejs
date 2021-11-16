@@ -51,7 +51,23 @@
                             id="floatingPasswordConfirm" placeholder="Confirm Password" required>
                         <label for="floatingPasswordConfirm">Confirm Password</label>
                     </div>
-                    
+
+                    <h4>Are you signing up as a tutor or student?</h4>
+                      <input type="radio" id="html" name="role" value="Tutor" required>
+                      <label for="html">Tutor</label><br>
+                      <input type="radio" id="css" name="role" value="Student" required>
+                      <label for="css">Student</label><br>
+
+                    <div class="w-100 mx-auto py-1 my-1">
+                        <select name="major" class="form-select">
+                            <option selected value="CS">Select Major:</option>
+                            <% var majors = ["CS", "BIO", "ARCH"]%>
+                            <% for (var i=0; i < majors.length; i++) { %>
+                                <option value=<%=majors[i] %>> <%= majors[i] %>
+                                </option>
+                                <% } %>
+                        </select>
+                    </div>
                     <button class="w-100 btn btn-lg btn-primary" type="submit" value="login">Sign Up</button>
                 </form>
             </div>

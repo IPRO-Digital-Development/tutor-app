@@ -45,19 +45,19 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        "script-src": ["'self'", "'unsafe-inline'", "notedwin.tech"],
-        "frame-src": [
-          "https://datastudio.google.com/embed/reporting/f6f80816-a403-4e41-9cef-59185f89973b/page/HDQ0B",
-        ],
-      },
-    },
-  })
-);
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       directives: {
+//         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+//         "script-src": ["'self'", "'unsafe-inline'", "notedwin.tech"],
+//         "frame-src": [
+//           "https://datastudio.google.com/embed/reporting/f6f80816-a403-4e41-9cef-59185f89973b/page/HDQ0B",
+//         ],
+//       },
+//     },
+//   })
+// );
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -66,6 +66,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public/css")); // used for assets such as pictures and css
 app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css"));
 app.use("/js", express.static(__dirname + "/node_modules/bootstrap/dist/js"));
+app.use(express.static('public'));
 app.use(express.static(__dirname + "/public/images"));
 app.set("views", path.join(__dirname, "./views")); // used for pages
 app.use(bodyParser.urlencoded({ extended: true }));

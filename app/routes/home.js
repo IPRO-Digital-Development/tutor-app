@@ -1,7 +1,9 @@
 var express = require("express");
 var User = require("../models/user");
 var Profile = require("../models/profile");
+var Tutor = require("../models/tutors");
 var passport = require("passport");
+var tutorID;
 
 var router = express.Router();
 
@@ -38,6 +40,15 @@ router.post(
     var email = req.body.email;
     var password = req.body.password;
     var repassword = req.body.repassword;
+    var role = req.body.role;
+    var major = req.body.major;
+    var tutor;
+
+    if (role == "Student"){
+      tutor = false;
+    }else{
+      tutor = true;
+    }
 
     if (password != repassword) {
       return res.redirect("signup");
@@ -56,15 +67,44 @@ router.post(
           return res.redirect("signup");
         }
         if (!err) {
-          console.log("6");
-          var newUser = new User({
-            First_Name: First_Name,
-            Last_Name: Last_Name,
+          if(tutor){
+            var newTutor = new Tutor({
+              major: major,
+              tutor: First_Name + " " + Last_Name,
+              start_time: 1000,
+              end_time: 1400,
+              A_id: A_id,
+              weekdays: ["MO", "WE"]
+            });
+            newTutor.save();
+            var newUser = new User({
+              First_Name: First_Name,
+              Last_Name: Last_Name,
+              A_id: A_id,
+              email: email,
+              password: password,
+              Tutor: tutor
+            });
+          }else{
+            var newUser = new User({
+              First_Name: First_Name,
+              Last_Name: Last_Name,
+              A_id: A_id,
+              email: email,
+              password: password,
+              Tutor: tutor
+            });
+          }
+          var newProfile = new Profile({
             A_id: A_id,
             email: email,
-            password: password,
-          });
-
+            major: major,
+            interest: "",
+            classes: "",
+            availability: "",
+            description: "",
+          })
+          newProfile.save();
           newUser.save(next);
         }
       }
@@ -100,19 +140,8 @@ router.get("/profile", function (req, res, next) {
       function (err, data) {
         if (err) {
           console.log("err");
-        } else if (data == null) {
-          var NewProf = new Profile({
-            A_id: res.locals.currentUser.A_id,
-            email: res.locals.currentUser.email,
-            major: "",
-            interest: "",
-            classes: "",
-            availability: "",
-            description: "",
-          });
-          NewProf.save(next);
-          res.render("profile", { profData: NewProf });
-        } else {
+        } 
+        else {
           res.render("profile", { profData: data });
         }
       }
@@ -138,14 +167,13 @@ router.get("/profileEdit", function (req, res, next) {
 });
 
 router.post("/saveEditProf", function (req, res, next) {
-  var majorEd = req.body.Major;
   var interestEd = req.body.Interest;
   var classesEd = req.body.Classes;
   var availabilityEd = req.body.Availability;
   var descriptionEd = req.body.Description;
 
-  var lines = descriptionEd.trim().split("\n");
-  console.log(lines);
+  // var lines = descriptionEd.trim().split("\n");
+  // console.log(lines);
 
   if (res.locals.currentUser == null) {
     res.render("signin");
@@ -154,7 +182,6 @@ router.post("/saveEditProf", function (req, res, next) {
       { A_id: res.locals.currentUser.A_id },
       {
         $set: {
-          major: majorEd,
           interest: interestEd,
           classes: classesEd,
           availability: availabilityEd,
@@ -189,5 +216,35 @@ router.get("/cancelEdit", function (req, res) {
     );
   }
 });
+
+router.post("/meet_result", function(req, res){
+  tutorID = req.body.A_id;
+})
+
+router.get("/tutorProf", function(req, res){
+  var userData;
+  var userProf;
+  // console.log(tutorID)
+  User.findOne({A_id:tutorID}, function(err, data){
+    if(err){
+      console.log("user not found");
+    }
+    else if (!err){
+      userData = {
+        Full_Name: data.First_Name + " " + data.Last_Name,
+        email: data.email,
+      }
+    }
+  })
+
+  Profile.findOne({A_id:tutorID}, function(err, data){
+    if (err) {
+      console.log("error");
+    }else{
+      // userProf = data
+      res.render("tutorProf", { profData: data, tutorData: userData });
+    }
+  })
+})
 
 module.exports = router;

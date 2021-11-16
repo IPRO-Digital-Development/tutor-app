@@ -7,8 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="normalize.css">
     <link rel="stylesheet" href="main.css">
-    <script src="/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="meet_result.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    
+    
     <title>Tutor App</title>
 </head>
 
@@ -29,13 +32,18 @@
                 <a>bruh</a>
               <% ;} else{ %>  
                 <% tutors.forEach(function(tutor) { %>
-                <li> Name:<%= tutor.tutor %> Major:<%= tutor.major %></li>
+                <div class = "tutor py-1">
+                    <span style="display: none;" id="tutor_id"><%= tutor.A_id%></span>
+                    <span id = "sel_tutor">Name: <button id="name"><%= tutor.tutor %></button> Major: <%= tutor.major %></span>
+                </div>
              <% })} %>
 
-
         </div>
+
+        <script type="text/javascript" src="javascript/meetLink.js"></script>
     </div>
 
 </body>
+
 
 </html>

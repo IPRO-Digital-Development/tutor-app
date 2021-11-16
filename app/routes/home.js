@@ -222,29 +222,34 @@ router.post("/meet_result", function(req, res){
 })
 
 router.get("/tutorProf", function(req, res){
-  var userData;
-  var userProf;
+  // var userData;
+  // var userProf;
   // console.log(tutorID)
-  User.findOne({A_id:tutorID}, function(err, data){
+  User.findOne({A_id:tutorID}, function(err, userdata){
     if(err){
       console.log("user not found");
     }
     else if (!err){
-      userData = {
-        Full_Name: data.First_Name + " " + data.Last_Name,
-        email: data.email,
-      }
+      console.log(userdata)
+      Profile.findOne({A_id:tutorID}, function(err, data){
+        if (err) {
+          console.log("error");
+        }else{
+          // userProf = data
+          res.render("tutorProf", { profData: data, tutorData: userdata });
+        }
+      })
     }
   })
 
-  Profile.findOne({A_id:tutorID}, function(err, data){
-    if (err) {
-      console.log("error");
-    }else{
-      // userProf = data
-      res.render("tutorProf", { profData: data, tutorData: userData });
-    }
-  })
+  // Profile.findOne({A_id:tutorID}, function(err, data){
+  //   if (err) {
+  //     console.log("error");
+  //   }else{
+  //     // userProf = data
+  //     res.render("tutorProf", { profData: data, tutorData: userData });
+  //   }
+  // })
 })
 
 module.exports = router;

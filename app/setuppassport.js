@@ -25,29 +25,21 @@ module.exports = function () {
       },
       function (email, password, done) {
         User.findOne({ email: email }, function (err, data) {
+          // console.log(data)
           if (err) {
             return done(err);
           }
-          if (!data) {
-            console.log("1");
-            // return done(null, false, { message: "No user has that Email!" });
+          if (!data){
+            console.log("no user")
+            return done(null, false);
           }
-          if (password != data.password) {
+          else if (password != data.password) {
             console.log("2");
             return done(null, false);
           } else if (password == data.password) {
             // console.log(data);
             return done(null, data);
           }
-
-          // data.checkPassword(password, function (err, isMatch) {
-          //     if (err) { return done(err); }
-          //     if (isMatch) {
-          //         return done(null, data);
-          //     } else {
-          //         return done(null, false, { message: "Invalid password" });
-          //     }
-          // });
         });
       }
     )

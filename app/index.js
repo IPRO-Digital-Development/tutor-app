@@ -45,19 +45,19 @@ mongoose
   })
   .catch((err) => console.log(err));
 
-app.use(
-  helmet({
-    contentSecurityPolicy: {
-      directives: {
-        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        "script-src": ["'self'", "'unsafe-inline'", "notedwin.tech"],
-        "frame-src": [
-          "https://datastudio.google.com/embed/reporting/f6f80816-a403-4e41-9cef-59185f89973b/page/HDQ0B",
-        ],
-      },
-    },
-  })
-);
+// app.use(
+//   helmet({
+//     contentSecurityPolicy: {
+//       directives: {
+//         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+//         "script-src": ["'self'", "'unsafe-inline'", "notedwin.tech"],
+//         "frame-src": [
+//           "https://datastudio.google.com/embed/reporting/f6f80816-a403-4e41-9cef-59185f89973b/page/HDQ0B",
+//         ],
+//       },
+//     },
+//   })
+// );
 app.use(compression());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -66,6 +66,7 @@ app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public/css")); // used for assets such as pictures and css
 app.use("/css", express.static(__dirname + "/node_modules/bootstrap/dist/css"));
 app.use("/js", express.static(__dirname + "/node_modules/bootstrap/dist/js"));
+app.use(express.static('public'));
 app.use(express.static(__dirname + "/public/images"));
 app.set("views", path.join(__dirname, "./views")); // used for pages
 app.use(bodyParser.urlencoded({ extended: true }));

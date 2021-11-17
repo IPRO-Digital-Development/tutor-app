@@ -30,7 +30,7 @@ module.exports = function () {
           }
           if (!data) {
             console.log("1");
-            return done(null, false, { message: "No user has that Email!" });
+            // return done(null, false, { message: "No user has that Email!" });
           }
           if (password != data.password) {
             console.log("2");

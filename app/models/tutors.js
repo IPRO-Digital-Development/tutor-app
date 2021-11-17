@@ -5,6 +5,7 @@ var tutorSchema = new mongoose.Schema({
   tutor: { type: String, required: true },
   start_time: { type: Number, required: true },
   end_time: { type: Number, required: true },
+  A_id: { type: String, required: true, unique: true },
   weekdays: { type: Array, required: true },
 });
 

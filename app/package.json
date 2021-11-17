@@ -19,6 +19,7 @@
     "express-session": "^1.17.1",
     "googleapis": "^39.2.0",
     "helmet": "^4.6.0",
+    "jquery": "^3.6.0",
     "marked": "^3.0.4",
     "mongoose": "^6.0.6",
     "nodemon": "^2.0.12",

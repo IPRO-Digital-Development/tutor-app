@@ -2,6 +2,7 @@ var express = require("express");
 var User = require("../models/user");
 var Profile = require("../models/profile");
 var Tutor = require("../models/tutors");
+var Review = require("../models/review");
 var passport = require("passport");
 var tutorID;
 
@@ -234,26 +235,83 @@ router.get("/tutorProf", function(req, res){
       console.log("user not found");
     }
     else if (!err){
-      console.log(userdata)
+      // console.log(tutorID);
       Profile.findOne({A_id:tutorID}, function(err, data){
         if (err) {
           console.log("error");
         }else{
-          // userProf = data
+          // console.log("tutor data " + userdata + "\n profData " + data)
           res.render("tutorProf", { profData: data, tutorData: userdata });
         }
       })
     }
   })
-
-  // Profile.findOne({A_id:tutorID}, function(err, data){
-  //   if (err) {
-  //     console.log("error");
-  //   }else{
-  //     // userProf = data
-  //     res.render("tutorProf", { profData: data, tutorData: userData });
-  //   }
-  // })
 })
+
+router.post("/review", function(req,res){
+  tutorID = req.body.A_id;
+})
+
+router.get("/review", function(req, res, next){
+  var rProfData;
+  var rUserData;
+  // console.log(tutorID)
+  Profile.findOne({A_id:tutorID}, function(err, pdata){
+    if (err){
+      console.log("cant find major")
+    }else{
+      rProfData = pdata
+      User.findOne({A_id:tutorID}, function(err, tdata){
+        if (err){
+          console.log("cant find user");
+        }
+        else{
+          rUserData = tdata
+          Review.findOne({tutor_id:tutorID}, function(err, rdata){
+            if(err){
+              console.log("cant find review")
+            }
+            else if (rdata == null) {
+              var newReview = new Review({
+                      tutor_id: tutorID,
+                      review: [],
+              })
+              newReview.save(next)
+              res.render("review", {review: newReview, profData: rProfData, tutorData: rUserData})
+            } else if (rdata != null){
+              res.render("review", {review: rdata, profData: rProfData, tutorData: rUserData})
+            }
+          })
+        }
+      })
+    }
+  })
+})
+
+
+router.post("/submit_review", function(req,res) {
+  // console.log("tutor_id " + req.body.tutor_id + "\n review: " + req.body.review
+  //             + "\n date: " + req.body.date + "\n scores: " + req.body.scores);  
+  
+  var review_json = {
+    user_review: req.body.review,
+    review_date: req.body.date,
+    review_score: req.body.scores
+  }
+
+  // console.log(review_json);
+
+  Review.updateOne({tutor_id:req.body.tutor_id}, {$push: 
+    {review: 
+      {$each: [review_json], $position: 0},
+     }, returnOriginal: false}, function(err, data){
+       if(err){
+         console.log("review update error");
+       }else{
+         console.log(data);
+       }
+     })
+})
+
 
 module.exports = router;

@@ -21,12 +21,12 @@
                     <i class="fas fa-user fa-10x"></i>
                     <% if(tutorData != null) { %>
                         <span class="name"><%= tutorData.First_Name%> <%= tutorData.Last_Name%></span>
-                        <a href="mailto: <%= profData.email %>"><%= tutorData.email %></a>
+                        <a href="mailto: <%= tutorData.email %>"><%= tutorData.email %></a>
                         <span class="major">Major: <%= profData.major %></span>
                         <span class="role">Tutor</span>
                     <% } else { %>
                         <span class="name"></span>
-                        <a href="mailto: <%= profData.email %>"></a>
+                        <a href="mailto: <%= tutorData.email %>"></a>
                         <span class="major">Major: </span>
                         <span class="role">Tutor</span>
                     <% } %>

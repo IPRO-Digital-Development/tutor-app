@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="normalize.css">
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="review.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <script src="https://kit.fontawesome.com/cd39648b27.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <title>Tutor App</title>
+</head>
+
+<body>
+    <%- include('nav.ejs') %>
+    <div class="container" id="profile-container">
+        <div class="row">
+            <div class="col-md-3 border-right">
+                <div class="d-flex flex-column align-items-center text-center p-3 py-5 "> 
+                    <i class="fas fa-user fa-10x"></i>
+                    <% if(tutorData != null) { %>
+                        <span class="name"><%= tutorData.First_Name%> <%= tutorData.Last_Name%></span>
+                        <a href="mailto: <%= tutorData.email %>"><%= tutorData.email %></a>
+                        <span class="major">Major: <%= profData.major %></span>
+                    <% } else { %>
+                        <span class="name"></span>
+                        <a href="mailto: <%= tutorData.email %>"></a>
+                        <span class="major">Major: </span>
+                    <% } %>
+                    <% if(review.review.length == 0) { %>
+                        <span class="" id="tutor_score"> 0/10 </span>
+                    <% } else if (review.review.length > 0) { %>
+                        <% var scores = 0;%>
+                        <% review.review.forEach(function(reviews) { %>
+                            <% var a = parseFloat(reviews.review_score) %>
+                            <% scores = scores + a %>
+                        <% }) %>
+                        <span class="" id="tutor_score">Tutor Score: <%= (scores/review.review.length).toFixed(1) %>/10</span>
+                    <% } %>
+                </div>
+            </div>
+            <div class="sub_review col-md-9 border-right">
+                <% var check_login;%>
+                <% if (currentUser != null) { %>
+                    <% check_login = true %>
+                <% }else { check_login = false } %>
+                <span style="display: none;" id="check_login"><%= check_login %></span>
+                <div class="p-3 py-5">
+                    <div class="d-flex">
+                        <h4 class="text-right">Reviews</h4>
+                    </div>
+                    <div class="col-md-12">
+                        <textarea class="form-control my-2" rows="2" id="review_text"></textarea>
+                        <div class="rows">
+                            <span style="display: none;" id="tutor_id"><%= tutorData.A_id%></span>
+                            <select class="form-group mb-2" name="score" aria-label=".form-select-lg example" id="score_option">
+                                <option selected value="None">Select Score:</option>
+                                <% var scores = [1,2,3,4,5,6,7,8,9,10]%>
+                                <% for (var i=0; i < scores.length; i++) { %>
+                                    <option value=<%=scores[i] %>> <%= scores[i] %>
+                                    </option>
+                                    <% } %>
+                            </select>
+                            <button class="btn btn-primary" id="submit">Submit review</button>
+                        </div>
+                    </div>
+                    <div class="review_c col-md-12 my-2">
+                        <% if(review.review.length == 0) { %>
+                        <p>This tutor currently has no reviews</p>
+                        <% } else if (review.review.length > 0) { %>
+                            <div class="divide col-md-12 py-1"> </div>
+                            <% review.review.forEach(function(reviews) { %>
+                                <textarea class="form-control" id="read_only" rows="2" disabled="yes" readonly="yes"><%= reviews.user_review %></textarea>
+                                <div class="row">
+                                    <span class="mx-3 col-md-3">Score: <%= reviews.review_score %></span>
+                                    <span class="col-md-4 offset-md-4">Review Date: <%= reviews.review_date %></span>
+                                </div>
+                                <div class="divide col-md-12 py-1"> </div>
+                            <% }) %>
+                        <% } %>
+                    </div>
+
+            </div>
+
+        </div>
+        <script type="text/javascript" src="javascript/review.js"></script>
+    </div>
+</body>
+
+</html>

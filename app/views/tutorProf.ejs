@@ -22,11 +22,11 @@
                     <% if(tutorData != null) { %>
                         <span class="name"><%= tutorData.First_Name%> <%= tutorData.Last_Name%></span>
                         <a href="mailto: <%= tutorData.email %>"><%= tutorData.email %></a>
-                        <span class="major">Major: <%= profData.major %></span>
+                        <span class="major">Major: <%= major %></span>
                         <span class="role">Tutor</span>
                     <% } else { %>
                         <span class="name"></span>
-                        <a href="mailto: <%= tutorData.email %>"></a>
+                        <a href=""></a>
                         <span class="major">Major: </span>
                         <span class="role">Tutor</span>
                     <% } %>

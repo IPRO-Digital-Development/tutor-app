@@ -240,8 +240,8 @@ router.get("/tutorProf", function(req, res){
         if (err) {
           console.log("error");
         }else{
-          // console.log("tutor data " + userdata + "\n profData " + data)
-          res.render("tutorProf", { profData: data, tutorData: userdata });
+          //console.log("user " + userdata + "\n profile " + data)
+          res.render("tutorProf", {major: data.get('Major'), profData: data, tutorData: userdata });
         }
       })
     }

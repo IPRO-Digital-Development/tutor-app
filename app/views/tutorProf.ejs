@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="normalize.css">
-    <link rel="stylesheet" href="main.css">
-    <link rel="stylesheet" href="profile.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
     <script src="https://kit.fontawesome.com/cd39648b27.js" crossorigin="anonymous"></script>
     <title>Tutor App</title>
@@ -20,13 +19,18 @@
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5 "> 
                     <i class="fas fa-user fa-10x"></i>
-                    <span class="name"><%= currentUser.First_Name%> <%= currentUser.Last_Name%></span>
-                    <a href="mailto: <%= profData.email %>"><%= profData.email %></a>
-                    <span class="major">Major: <%= profData.major %></span>
-                    <% var role; %>
-                    <% if (currentUser.Tutor == true) {%>
-                        <% role = "Tutor" } else { role = "Student"}%>
-                    <span class="role">Role: <%= role %></span>
+                    <% if(userdata != null) { %>
+                        <span class="name"><%= userdata.First_Name%> <%= userdata.Last_Name%></span>
+                        <a><%= userdata.email %></a>
+                        <span class="major">Major: <%= userdata.major %></span>
+                        <span class="role">Tutor</span>
+                    <% } else { %>
+                        <span class="name"></span>
+                        <a href=""></a>
+                        <span class="major">Major: </span>
+                        <span class="role">Tutor</span>
+                    <% } %>
+
                 </div>
             </div>
             <div class="col-md-9 border-right">
@@ -35,31 +39,32 @@
                         <h4 class="text-right">Profile</h4>
                     </div>
                     <div class="profile-content row mt-2">
+                        <% if(profdata != null) { %>
                         <div class="col-md-12"><label class="h5">Interest</label>
-                            <p><%= profData.interest %></p>
+                            <p><%= profdata.interest %></p>
                         </div>
                         <div class="col-md-12"><label class="h5">Classes Taken</label>
-                            <p><%= profData.classes %></p>
+                            <p><%= profdata.classes %></p>
                         </div>
                         <div class="col-md-12"><label class="h5">Availability</label>
-                            <p><%= profData.availability %></p>
+                            <p><%= profdata.availability %></p>
                         </div>
                         <div class="col-md-12"><label class="h5">Self-Description</label>
-                            <% var lines = profData.description.split("\n") %>
-                            <% console.log(lines) %>
+                            <% var lines = profdata.description.split("\n") %>
                             <p><%= lines[0]%></br>
                             <% lines.shift() %>
                             <% lines.forEach(function(line) {  %>
                                 <% if(line) { %>
-                                    <span><%= line %></span></br>
+                                    <%= line %></br>
                                 <% } %>
                             <% }) %>
                         </div>
-                    </div>
-                    <div class="mt-3 text-center">
-                        <form class="form-signin" method="GET" action="/profileEdit">
-                            <button class="btn btn-primary profile-button">Edit Profile</button>
-                        </form>
+                        <% } else { %>
+                            <div class="col-md-12"><label class="h5">Interest</label>
+                            <div class="col-md-12"><label class="h5">Classes Taken</label>
+                            <div class="col-md-12"><label class="h5">Availability</label>
+                            <div class="col-md-12"><label class="h5">Self-Description</label>
+                        <% } %>
                     </div>
                 </div>
             </div>

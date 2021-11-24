@@ -24,20 +24,35 @@
             </div>
 
             <h2>
-                <%= query.major %> <%= query.time %> <%= query.day %>
+                Tutor results:
+                A <%= query.major %> tutor available on  <%= query.day %> at <%= query.time %>.
             </h2>
 
 
             <% if(tutors === undefined || tutors.length == 0){ %>
-                <a>No tutor available</a>
-              <% ;} else{ %>  
-                <% tutors.forEach(function(tutor) { %>
-                <div class = "tutor py-1">
-                    <span style="display: none;" id="tutor_id"><%= tutor.A_id%></span>
-                    <span id = "sel_tutor">Name: <button id="name"><%= tutor.tutor %></button> Major: <%= tutor.major %></span><span><button id="review">review</button></span>
+                <a>No tutor available.</a>
+              <% ;} else{ %>
+                <div class="card-group"> 
+                    <% tutors.forEach(function(tutor,i) { %>
+                    <div class="card my-5 mx-5">
+                        <img class="card-img-top" src="tutor<%= i%3 %>.jpg" alt="Card image cap">
+                        <div class="card-body">
+                          <h5 class="card-title"><%= tutor.tutor %></h5>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Major: <%= tutor.major %></li>
+                          <li class="list-group-item">Rating: <%= tutor.rating %></li>
+                        </ul>
+                        <div class="card-body">
+                            <a href="/tutorProf/<%= tutor.A_id %>" class="card-link">View Tutor profile!</a>
+                            <div class = "tutor py-1">
+                                <span style="display: none;" id="tutor_id"><%= tutor.A_id%></span>
+                                <button id="review">review</button>
+                            </div>
+                        </div>
+                    </div>
+                <% })} %>
                 </div>
-             <% })} %>
-
         </div>
 
         <script type="text/javascript" src="javascript/meetLink.js"></script>

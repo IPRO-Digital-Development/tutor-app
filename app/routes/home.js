@@ -240,8 +240,8 @@ router.get("/tutorProf", function(req, res){
         if (err) {
           console.log("error");
         }else{
-          //console.log("user " + userdata + "\n profile " + data)
-          res.render("tutorProf", {major: data.get('Major'), profData: data, tutorData: userdata });
+          // console.log("tutor data " + userdata + "\n profData " + data)
+          res.render("tutorProf", { profData: data, tutorData: userdata });
         }
       })
     }
@@ -267,11 +267,12 @@ router.get("/review", function(req, res, next){
         }
         else{
           rUserData = tdata
-          Review.findOne({tutor_id:tutorID}, function(err, rdata){
+          Review.findOne({tutor_id:tutorID}, async function(err, rdata){
             if(err){
               console.log("cant find review")
             }
             else if (rdata == null) {
+              await new Promise(r => setTimeout(r, 1000));
               var newReview = new Review({
                       tutor_id: tutorID,
                       review: [],

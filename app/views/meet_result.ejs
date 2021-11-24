@@ -33,9 +33,9 @@
                 <a>No tutor available.</a>
               <% ;} else{ %>
                 <div class="card-group"> 
-                    <% tutors.forEach(function(tutor) { %>
+                    <% tutors.forEach(function(tutor,i) { %>
                     <div class="card my-5 mx-5">
-                        <img class="card-img-top" src="profileFigure.jpg" alt="Card image cap">
+                        <img class="card-img-top" src="tutor<%= i%3 %>.jpg" alt="Card image cap">
                         <div class="card-body">
                           <h5 class="card-title"><%= tutor.tutor %></h5>
                         </div>
@@ -45,7 +45,10 @@
                         </ul>
                         <div class="card-body">
                             <a href="/tutorProf/<%= tutor.A_id %>" class="card-link">View Tutor profile!</a>
-                            <span id = "sel_tutor"> <button id="name"></button> </span><span><button id="review">Review Tutor</button></span>
+                            <div class = "tutor py-1">
+                                <span style="display: none;" id="tutor_id"><%= tutor.A_id%></span>
+                                <button id="review">review</button>
+                            </div>
                         </div>
                     </div>
                 <% })} %>

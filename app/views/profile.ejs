@@ -42,11 +42,12 @@
                         </div>
                         <div class="col-md-12"><label class="h5">Self-Description</label>
                             <% var lines = profData.description.split("\n") %>
+                            <% console.log(lines) %>
                             <p><%= lines[0]%></br>
                             <% lines.shift() %>
                             <% lines.forEach(function(line) {  %>
                                 <% if(line) { %>
-                                    <%= line %></br>
+                                    <span><%= line %></span></br>
                                 <% } %>
                             <% }) %>
                         </div>

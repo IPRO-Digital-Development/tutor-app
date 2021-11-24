@@ -29,14 +29,14 @@
                         <span class="major">Major: </span>
                     <% } %>
                     <% if(review.review.length == 0) { %>
-                        <span class="" id="tutor_score"> 0/10 </span>
+                        <span class="" id="tutor_score">Rating: 0/10 </span>
                     <% } else if (review.review.length > 0) { %>
                         <% var scores = 0;%>
                         <% review.review.forEach(function(reviews) { %>
                             <% var a = parseFloat(reviews.review_score) %>
                             <% scores = scores + a %>
                         <% }) %>
-                        <span class="" id="tutor_score">Tutor Score: <%= (scores/review.review.length).toFixed(1) %>/10</span>
+                        <span class="" id="tutor_score">Rating: <%= (scores/review.review.length).toFixed(1) %>/10</span>
                     <% } %>
                 </div>
             </div>

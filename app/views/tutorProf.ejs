@@ -19,10 +19,10 @@
             <div class="col-md-3 border-right">
                 <div class="d-flex flex-column align-items-center text-center p-3 py-5 "> 
                     <i class="fas fa-user fa-10x"></i>
-                    <% if(userdata != null) { %>
-                        <span class="name"><%= userdata.First_Name%> <%= userdata.Last_Name%></span>
-                        <a><%= userdata.email %></a>
-                        <span class="major">Major: <%= userdata.major %></span>
+                    <% if(tutorData != null && tutorMajor != null) { %>
+                        <span class="name"><%= tutorData.First_Name%> <%= tutorData.Last_Name%></span>
+                        <a><%= tutorData.email %></a>
+                        <span class="major">Major: <%= tutorMajor.major %></span>
                         <span class="role">Tutor</span>
                     <% } else { %>
                         <span class="name"></span>
@@ -39,18 +39,18 @@
                         <h4 class="text-right">Profile</h4>
                     </div>
                     <div class="profile-content row mt-2">
-                        <% if(profdata != null) { %>
+                        <% if(profData != null) { %>
                         <div class="col-md-12"><label class="h5">Interest</label>
-                            <p><%= profdata.interest %></p>
+                            <p><%= profData.interest %></p>
                         </div>
                         <div class="col-md-12"><label class="h5">Classes Taken</label>
-                            <p><%= profdata.classes %></p>
+                            <p><%= profData.classes %></p>
                         </div>
                         <div class="col-md-12"><label class="h5">Availability</label>
-                            <p><%= profdata.availability %></p>
+                            <p><%= profData.availability %></p>
                         </div>
                         <div class="col-md-12"><label class="h5">Self-Description</label>
-                            <% var lines = profdata.description.split("\n") %>
+                            <% var lines = profData.description.split("\n") %>
                             <p><%= lines[0]%></br>
                             <% lines.shift() %>
                             <% lines.forEach(function(line) {  %>

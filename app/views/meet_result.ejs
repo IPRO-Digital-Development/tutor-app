@@ -42,13 +42,14 @@
                         </div>
                         <ul class="list-group list-group-flush">
                           <li class="list-group-item">Major: <%= tutor.major %></li>
-                          <li class="list-group-item">Rating: <%= tutor.rating %></li>
+                          <!-- <li class="list-group-item">Rating: <%= tutor.rating %></li> -->
                         </ul>
                         <div class="card-body">
-                            <a href="/tutorProf/<%= tutor.A_id %>" class="card-link">View Tutor profile!</a>
+                            <button id="name" class="card-link">View Tutor profile!</button>
+                            <!-- <a href="/tutorProf/<%= tutor.A_id %>" class="card-link">View Tutor profile!</a> -->
                             <div class = "tutor py-1">
                                 <span style="display: none;" id="tutor_id"><%= tutor.A_id%></span>
-                                <button id="review">review</button>
+                                <button id="review">Check Tutor Reviews</button>
                             </div>
                         </div>
                     </div>

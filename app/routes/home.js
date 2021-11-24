@@ -229,7 +229,7 @@ router.post("/meet_result", function(req, res){
 router.get("/tutorProf", function(req, res){
   // var userData;
   // var userProf;
-  // console.log(tutorID)
+  console.log(tutorID)
   User.findOne({A_id:tutorID}, function(err, userdata){
     if(err){
       console.log("user not found");
@@ -240,8 +240,15 @@ router.get("/tutorProf", function(req, res){
         if (err) {
           console.log("error");
         }else{
-          // console.log("tutor data " + userdata + "\n profData " + data)
-          res.render("tutorProf", { profData: data, tutorData: userdata });
+          Tutor.findOne({A_id:tutorID}, function(err, tdata){
+            if(err){
+              console.log("cant find tutor");
+            }
+            else{
+              console.log("userdata " + userdata + "\n profData: " + tdata)
+            res.render("tutorProf", { profData: data, tutorData: userdata, tutorMajor: tdata });
+            }
+          })
         }
       })
     }
@@ -256,7 +263,7 @@ router.get("/review", function(req, res, next){
   var rProfData;
   var rUserData;
   // console.log(tutorID)
-  Profile.findOne({A_id:tutorID}, function(err, pdata){
+  Tutor.findOne({A_id:tutorID}, function(err, pdata){
     if (err){
       console.log("cant find major")
     }else{
